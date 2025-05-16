@@ -54,13 +54,18 @@ def commit_and_push(repo: Repo, message: str, remote_url: str):
         print("✅ Added remote 'origin'.")
 
     try:
-        # Set upstream the first time
-        current_branch = repo.active_branch.name
-        repo.git.push("--set-upstream", "origin", current_branch, force=True)
-        print(f"🚀 Pushed branch '{current_branch}' to GitHub!")
+        # Create a new branch to avoid protected master/main
+        new_branch = "automated-push"
+        if new_branch not in repo.heads:
+            repo.git.checkout("-b", new_branch)
+        else:
+            repo.git.checkout(new_branch)
+
+        repo.git.push("--set-upstream", "origin", new_branch, force=True)
+        print(f"🚀 Pushed to new branch '{new_branch}'!")
     except Exception as e:
         print(f"❌ Push failed: {e}")
-
+        
 @flow(name="GitHub Push Flow")
 def git_push_flow():
     repo = init_git_repo(LOCAL_FOLDER)
