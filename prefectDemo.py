@@ -71,21 +71,22 @@ def git_push_flow():
     repo = init_git_repo(LOCAL_FOLDER)
     commit_and_push(repo, COMMIT_MESSAGE, REMOTE_URL)
 
+@flow
+def collect_petstore_data():
+    url= "https://petstore.swagger.io/v2/store/inventory"
+    get_response = response(url)
+    
+
+def main():
+    collect_petstore_data()
 if __name__ == "__main__":
+    main()
     git_push_flow()
    
 #@task
 #def insert_to_db(inventory, db_host, db_user,db_name):
     
 
-#@flow
-#def collect_petstore_data():
-#    url= "https://petstore.swagger.io/v2/store/inventory"
-#    get_response = response(url)
-    
 
-#def main():
- #   collect_petstore_data()
 
-#if __name__ == "__main__":
-#    main()
+   
