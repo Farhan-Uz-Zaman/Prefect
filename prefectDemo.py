@@ -13,7 +13,7 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 if not GITHUB_TOKEN:
     raise EnvironmentError("GITHUB_TOKEN not found.")
 
-REMOTE_URL = f"https://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@github.com/Farhan-Uz-Zaman/Prefect.git"
+REMOTE_URL = f"https://{GITHUB_TOKEN}@github.com/{GITHUB_USERNAME}/{REPO_NAME}.git"
 
 
 #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
