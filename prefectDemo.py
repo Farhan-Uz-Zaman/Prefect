@@ -54,8 +54,10 @@ def commit_and_push(repo: Repo, message: str, remote_url: str):
         print("✅ Added remote 'origin'.")
 
     try:
-        repo.remote("origin").push(force=True)
-        print("🚀 Pushed to GitHub!")
+        # Set upstream the first time
+        current_branch = repo.active_branch.name
+        repo.git.push("--set-upstream", "origin", current_branch, force=True)
+        print(f"🚀 Pushed branch '{current_branch}' to GitHub!")
     except Exception as e:
         print(f"❌ Push failed: {e}")
 
